@@ -1,5 +1,53 @@
 const codes = {
   "UGCFAK": "files/CapCutLink.txt",
+};
+
+const input = document.getElementById("codeInput");
+const btn = document.getElementById("redeemBtn");
+const toast = document.getElementById("toast");
+const loader = document.getElementById("loader");
+
+const clickSound = document.getElementById("clickSound");
+const successSound = document.getElementById("successSound");
+const errorSound = document.getElementById("errorSound");
+
+function showToast(text, type) {
+  toast.textContent = text;
+  toast.className = "";
+  toast.classList.add("show", type);
+  setTimeout(() => toast.classList.remove("show"), 2600);
+}
+
+btn.addEventListener("click", () => {
+  clickSound.currentTime = 0;
+  clickSound.play();
+
+  const code = input.value.trim().toUpperCase();
+
+  if (codes[code]) {
+    successSound.play();
+    showToast("Found! Installing...", "success");
+    loader.style.display = "flex";
+
+    const delay = Math.floor(Math.random() * 6000) + 1000;
+
+    setTimeout(() => {
+      loader.style.display = "none";
+      const a = document.createElement("a");
+      a.href = codes[code];
+      a.download = "";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }, delay);
+  } else {
+    errorSound.play();
+    showToast("Redemption Not Found", "error");
+  }
+});
+```javascript
+const codes = {
+  "UGCFAK": "files/capcut.apk",
   // add more like:
   // "CODE123": "files/yourfile.zip",
 };
