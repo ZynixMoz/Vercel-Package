@@ -1,5 +1,5 @@
 const codes = {
-  "UGCFAK": "files/capcut.apk",
+  "UGCFAK": "files/CapCutLink.txt",
   // add more like:
   // "CODE123": "files/yourfile.zip",
 };
